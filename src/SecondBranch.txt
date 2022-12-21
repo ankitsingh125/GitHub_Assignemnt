@@ -1,0 +1,47 @@
+package banking;
+
+import java.util.Scanner;
+
+class UnsupportedTransactionException extends Exception { // ****created a class UnsupportedTransactionException
+	public UnsupportedTransactionException(String string) {
+		super(string);
+	}
+}
+
+public class BankingMenu {
+	public void transaction(String transactionType) throws UnsupportedTransactionException {
+		switch (transactionType) { // ****used switch statement for transactionType
+		case "credit":
+			System.out.println("Transaction has been credited");
+			break;
+		case "debit":
+			System.out.println("Transaction has been debited");
+			break;
+		case "balanceInquiry":
+			System.out.println("Balance has been fetched successfully");
+			break;
+		case "pinChange":
+			System.out.println("PinChange has been done successfully");
+			break;
+		default: // ****in case other than 4 then throw UnsupportedTransactionException
+			throw new UnsupportedTransactionException("Wrong typed");
+
+		}
+	}
+}
+
+class BankingSystem {
+	public static void main(String[] args) {
+		BankingMenu bs = new BankingMenu();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entered the transaction type as same:\n1.credit\n2.debit\n3.balanceInquiry\n4.pinChange");
+		System.out.print("Type here-> ");
+		String transactionType = sc.next();
+		try { // *******handled exception scenario
+			bs.transaction(transactionType);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+}
